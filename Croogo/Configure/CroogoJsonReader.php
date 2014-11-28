@@ -2,7 +2,7 @@
 
 namespace Croogo\Croogo\Configure;
 
-use Cake\Configure\ConfigEngineInterface;
+use Cake\Core\Configure\ConfigEngineInterface;
 use Croogo\Croogo\CroogoJson;
 
 /**
@@ -65,7 +65,7 @@ class CroogoJsonReader implements ConfigEngineInterface {
 /**
  * Dumps the state of Configure data into an json string.
  */
-	public function dump($filename, $data) {
+	public function dump($key, array $data) {
 		$runtime = array(
 			'routes' => '',
 			'controller_properties' => '',
@@ -82,7 +82,7 @@ class CroogoJsonReader implements ConfigEngineInterface {
 			$options |= JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT;
 		}
 		$contents = CroogoJson::stringify($data, $options);
-		return $this->_writeFile($this->_path . $filename, $contents);
+		return $this->_writeFile($this->_path . $key, $contents);
 	}
 
 /**
