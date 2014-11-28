@@ -37,5 +37,11 @@
 	},
 	"suggest": {
 		"croogo/locale": "Localization for Croogo"
-	}
+	},
+	"autoload": {
+		"psr-4": {
+			"Croogo\\": ""
+		}
+	},
+	"minimum-stability": "dev"
 }
