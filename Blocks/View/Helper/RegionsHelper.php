@@ -50,8 +50,10 @@ class RegionsHelper extends AppHelper {
 		}
 
 		$options = Hash::merge(array(
+			'elementData' => array(),
 			'elementOptions' => array(),
 		), $options);
+		$elementData = $options['elementData'];
 		$elementOptions = $options['elementOptions'];
 
 		$defaultElement = 'Blocks.block';
@@ -69,8 +71,9 @@ class RegionsHelper extends AppHelper {
 			'content' => &$block['Block']['body'],
 		));
 
+		$elementData = compact('block') + $elementData;
 		if ($exists) {
-			$blockOutput = $this->_View->element($element, compact('block'), $elementOptions);
+			$blockOutput = $this->_View->element($element, $elementData, $elementOptions);
 		} else {
 			if (!empty($element)) {
 				$this->log(sprintf('Missing element `%s` in block `%s` (%s)',
@@ -79,7 +82,7 @@ class RegionsHelper extends AppHelper {
 					$block['Block']['id']
 				), LOG_WARNING);
 			}
-			$blockOutput = $this->_View->element($defaultElement, compact('block'), array('ignoreMissing' => true) + $elementOptions);
+			$blockOutput = $this->_View->element($defaultElement, $elementData, array('ignoreMissing' => true) + $elementOptions);
 		}
 
 		Croogo::dispatchEvent('Helper.Regions.afterSetBlock', $this->_View, array(
@@ -90,7 +93,7 @@ class RegionsHelper extends AppHelper {
 		if ($exists && $element != $defaultElement && $enclosure) {
 			$block['Block']['body'] = $blockOutput;
 			$block['Block']['element'] = null;
-			$output .= $this->_View->element($defaultElement, compact('block'), $elementOptions);
+			$output .= $this->_View->element($defaultElement, $elementData, $elementOptions);
 		} else {
 			$output .= $blockOutput;
 		}
