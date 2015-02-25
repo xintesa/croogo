@@ -89,7 +89,7 @@ class RegionsHelper extends AppHelper {
 			'content' => &$blockOutput,
 		));
 
-		$enclosure = isset($block['Params']['enclosure']) ? $block['Params']['enclosure'] === "true" : true;
+		$enclosure = isset($block['Params']['enclosure']) ? $block['Params']['enclosure'] === "true" : false;
 		if ($exists && $element != $defaultElement && $enclosure) {
 			$block['Block']['body'] = $blockOutput;
 			$block['Block']['element'] = null;
