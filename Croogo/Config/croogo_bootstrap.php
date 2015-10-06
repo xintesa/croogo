@@ -41,6 +41,16 @@ if (file_exists(APP . 'Config' . DS . 'settings.json')) {
 }
 
 /**
+ * Load RedisSession in order to read Xinergy.language and override Site.locale
+ */
+App::uses('CakeSession', 'Model/Datasource');
+CakePlugin::load('RedisSession', ['bootstrap' => true]);
+$language = CakeSession::read('Xinergy.language');
+if ($language) {
+	Configure::write('Site.locale', $language);
+}
+
+/**
  * Locale
  */
 Configure::write('Config.language', Configure::read('Site.locale'));
