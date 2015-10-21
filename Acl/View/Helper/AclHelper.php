@@ -166,4 +166,31 @@ class AclHelper extends Helper {
 		return false;
 	}
 
+/**
+ * Check if url is allowed by Session
+ *
+ * @param array|string $url link/url to check
+ * @return boolean
+ */
+	public function linkIsAllowedBySession($url) {
+		$roleId = AuthComponent::user('Role.id');
+		$userId = AuthComponent::user('id');
+		if ($roleId == 1) {
+			return true;
+		}
+
+		$checkRole = $this->linkIsAllowedByRoleId($roleId, $url);
+		if ($checkRole) {
+			return true;
+		}
+
+		$checkUser = $this->linkIsAllowedByUserId($userId, $url);
+		if ($checkUser) {
+			return true;
+		}
+
+		return false;
+
+	}
+
 }
