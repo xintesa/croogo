@@ -3,7 +3,7 @@
 CroogoNav::add('sidebar', 'dashboard', array(
 	'icon' => 'home',
 	'title' => __d('croogo', 'Dashboard'),
-	'url' => '/admin',
+	'url' => Configure::read('Croogo.dashboardUrl'),
 	'weight' => 0,
 ));
 
