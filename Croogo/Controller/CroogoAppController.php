@@ -23,7 +23,9 @@ class CroogoAppController extends Controller {
  */
 	protected $_defaultComponents = array(
 		'Croogo.Croogo',
-		'Security',
+		'Security' => array(
+			'csrfUseOnce' => false,
+		),
 		'Acl',
 		'Auth',
 		'Session',
