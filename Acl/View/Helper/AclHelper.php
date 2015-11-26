@@ -173,7 +173,7 @@ class AclHelper extends Helper {
  * @return boolean
  */
 	public function linkIsAllowedBySession($url) {
-		$roleId = AuthComponent::user('Role.id');
+		$roleId = AuthComponent::user('role_id');
 		$userId = AuthComponent::user('id');
 		if ($roleId == 1) {
 			return true;
