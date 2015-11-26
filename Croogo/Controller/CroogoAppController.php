@@ -265,6 +265,7 @@ class CroogoAppController extends Controller {
 		}
 
 		if (
+			!$this->request->is('ajax') &&
 			!isset($this->request->params['admin']) &&
 			Configure::read('Site.status') == 0 &&
 			$this->Auth->user('role_id') != 1
